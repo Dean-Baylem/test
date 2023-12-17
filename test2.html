@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .carousel {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .carousel-item {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      transition: transform 0.5s ease-in-out;
+      left: 50%;
+      top: 50%;
+    }
+    
+    .item1 {
+        background: url("https://fastly.picsum.photos/id/110/200/200.jpg?hmac=aekmsQTsPRt4hCd1khMC5QVihAaBeTigUCpcDBzhXlY");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .item2 {
+        background: url("https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .item3 {
+        background: url("https://fastly.picsum.photos/id/190/200/200.jpg?hmac=WWXFTlTLvsXZseURWcXXDOC8Ie54it2IFL1gasrgrMQ");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .cover {
+        background: transparent;
+        bottom: 0;
+        height: 40%;
+        position: absolute;
+        width: 100%;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+  <div class="carousel">
+    <div class="carousel-item item1" value="1" style="transform: rotate(0deg) translate(-50%, -50%) rotate(0deg);">
+        1
+    </div>
+    <div class="carousel-item item2" value="2" style="transform: rotate(90deg) translate(-50%, -50%) rotate(-90deg);">
+        2
+    </div>
+    <div class="carousel-item item3" value="3" style="transform: rotate(180deg) translate(-50%, -50%) rotate(180deg);">
+        3
+    </div>
+    <div class="carousel-item item4" value="3" style="transform: rotate(270deg) translate(-50%, -50%) rotate(-270deg);">
+        3
+    </div>
+    <div class="cover"></div>
+    </div>
+  </div>
+
+  <button class="testButton">Click me</button>
+  <script>
+    const testButton = document.querySelector(".testButton");
+    const items = document.querySelectorAll('.carousel-item');
+    const angle = 90; // Angle of the circular path in degrees
+    const radius = 125; // Radius of the circular path (adjusted)
+    let toUpdate = 4;
+
+    let rotation = 0;
+
+    function updateCarousel() {
+        toUpdate--
+        if (toUpdate === -1) { 
+            toUpdate = 3;
+        }
+        console.log(toUpdate);
+      items.forEach((item, index) => {
+        const angleInRadians = (rotation + index * angle) * (Math.PI / 180) * -1;
+
+        // Adjust the translation value to keep elements within the container
+        item.style.transform = `rotate(${angleInRadians}rad) translate(${radius}px) rotate(${-angleInRadians}rad) translate(-50%, -50%)`;
+      });
+
+      let nextImg;
+        if (toUpdate === 0) {
+            nextImg = items[3].classList[1]
+        } else {
+            nextImg = items[toUpdate - 1].classList[1];
+        }
+        const currentImg = items[toUpdate].classList[1];
+        items[toUpdate].classList.remove(currentImg);
+        items[toUpdate].classList.add(nextImg);
+    }
+
+    function rotateCarousel() {
+      rotation += 90; // You can adjust the rotation speed here
+      updateCarousel();
+    }
+
+    // Initial setup
+    updateCarousel();
+
+    // Rotate the carousel every 2 seconds (adjust the interval as needed)
+    testButton.addEventListener("click", rotateCarousel);
+  </script>
+</body>
+</html>

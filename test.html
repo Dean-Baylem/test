@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="carousel">
+    <div class="carousel-item item1">
+      1
+    </div>
+    <div class="carousel-item item2">
+      2
+    </div>
+    <div class="carousel-item item3">
+      3
+    </div>
+    <div class="carousel-item item4">
+      1
+    </div>
+  </div>
+
+  <script>
+    const items = document.querySelectorAll('.carousel-item');
+    const angle = 120; // Angle of the semi-circle in degrees
+    const radius = 150; // Radius of the semi-circle
+
+    let rotation = 0;
+
+    <!-- function updateCarousel() {
+      items.forEach((item, index) => {
+        const angleInRadians = (rotation + index * angle) * (Math.PI / 180);
+        const x = radius * Math.cos(angleInRadians);
+        const y = radius * Math.sin(angleInRadians);
+        item.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    } -->
+
+    function rotateCarousel() {
+      rotation += 120; // You can adjust the rotation speed here
+      updateCarousel();
+    }
+
+    // Initial setup
+    updateCarousel();
+
+    // Rotate the carousel every 2 seconds (adjust the interval as needed)
+
+  </script>
+</body>
+</html>
